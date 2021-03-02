@@ -234,3 +234,16 @@ class SimpleHistoryAdmin(admin.ModelAdmin):
     @property
     def revert_disabled(self):
         return getattr(settings, "SIMPLE_HISTORY_REVERT_DISABLED", False)
+
+
+class SimpleHistoryShowDeletedFilter(admin.SimpleListFilter):
+    title = "Entries"
+    parameter_name = "entries"
+
+    def lookups(self, request, model_admin):
+        return (("deleted_only", "Only Deleted"),)
+
+    def queryset(self, request, queryset):
+        if self.value():
+            return queryset.model.history.filter(history_type="-").distinct()
+        return queryset
