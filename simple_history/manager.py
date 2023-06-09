@@ -126,13 +126,17 @@ class HistoryDescriptor:
     def __get__(self, instance, owner):
         return HistoryManager.from_queryset(HistoricalQuerySet)(self.model, instance)
 
+
 class HistoryManyToManyDescriptor:
     def __init__(self, model, rel):
         self.rel = rel
         self.model = model
 
     def __get__(self, instance, owner):
-        return HistoryManyRelatedManager.from_queryset(QuerySet)(self.model, self.rel, instance)
+        return HistoryManyRelatedManager.from_queryset(QuerySet)(
+            self.model, self.rel, instance
+        )
+
 
 class HistoryManyRelatedManager(models.Manager):
     def __init__(self, through, rel, instance=None):
@@ -144,8 +148,13 @@ class HistoryManyRelatedManager(models.Manager):
 
     def get_queryset(self):
         qs = super().get_queryset()
-        through_qs = HistoryManager.from_queryset(HistoricalQuerySet)(self.through, self.instance)
-        return qs.filter(id__in=through_qs.all().values_list(self._m2m_through_field_name, flat=True))
+        through_qs = HistoryManager.from_queryset(HistoricalQuerySet)(
+            self.through, self.instance
+        )
+        return qs.filter(
+            id__in=through_qs.all().values_list(self._m2m_through_field_name, flat=True)
+        )
+
 
 class HistoryManager(models.Manager):
     def __init__(self, model, instance=None):
