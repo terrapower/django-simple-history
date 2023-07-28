@@ -103,6 +103,7 @@ from ..models import (
     PollWithManyToManyCustomHistoryID,
     PollWithManyToManyWithIPAddress,
     PollWithNonEditableField,
+    PollWithSelfManyToMany,
     PollWithSeveralManyToMany,
     Province,
     Restaurant,
@@ -1850,6 +1851,11 @@ class InheritedManyToManyTest(TestCase):
 
         self.assertEqual(add.restaurants.all().count(), 0)
         self.assertEqual(add.places.all().count(), 0)
+
+    def test_self_field(self):
+        poll1 = PollWithSelfManyToMany.objects.create()
+        poll2 = PollWithSelfManyToMany.objects.create()
+        poll1.relations.add(poll2)
 
 
 class ManyToManyWithSignalsTest(TestCase):

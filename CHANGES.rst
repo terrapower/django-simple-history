@@ -4,6 +4,12 @@ Changes
 Unreleased
 ----------
 
+- Fixed typos in the docs
+- Added feature to evaluate ``history`` model permissions explicitly when
+  ``SIMPLE_HISTORY_ENFORCE_HISTORY_MODEL_PERMISSIONS`` is set to ``True``
+  in ``settings`` (gh-1017).
+- Fixed ``SimpleHistoryAdmin`` not properly integrating with custom user models (gh-1177)
+- Fixes self-m2m fields not using the correct through field name (gh-1218)
 
 3.3.0 (2023-03-08)
 ------------------

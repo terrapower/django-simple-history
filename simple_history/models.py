@@ -672,7 +672,7 @@ class HistoricalRecords:
 
             insert_rows = []
 
-            through_field_name = type(original_instance).__name__.lower()
+            through_field_name = field.m2m_field_name()
 
             rows = through_model.objects.filter(**{through_field_name: instance})
 
