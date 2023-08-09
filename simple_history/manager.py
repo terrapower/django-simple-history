@@ -152,7 +152,7 @@ class HistoryManyRelatedManager(models.Manager):
             self.through, self.instance
         )
         return qs.filter(
-            id__in=through_qs.all().values_list(self._m2m_through_field_name, flat=True)
+            pk__in=through_qs.all().values_list(self._m2m_through_field_name, flat=True)
         )
 
 
