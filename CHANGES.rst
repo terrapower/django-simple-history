@@ -10,6 +10,7 @@ Unreleased
   in ``settings`` (gh-1017).
 - Fixed ``SimpleHistoryAdmin`` not properly integrating with custom user models (gh-1177)
 - Fixes self-m2m fields not using the correct through field name (gh-1218)
+- Allow setting change reason through ``SimpleHistoryAdmin``'s change form (gh-1232)
 
 3.3.0 (2023-03-08)
 ------------------

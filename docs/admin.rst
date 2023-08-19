@@ -7,7 +7,7 @@ model with the admin site.
 
 This will replace the history object page on the admin site and allow viewing
 and reverting to previous model versions.  Changes made in admin change forms
-will also accurately note the user who made the change.
+will also accurately note the user who made the change and allow for an optional submitted change reason to be stored with the change.
 
 .. image:: screens/1_poll_history.png
 
@@ -34,7 +34,7 @@ An example of admin integration for the ``Poll`` and ``Choice`` models:
     admin.site.register(Poll, SimpleHistoryAdmin)
     admin.site.register(Choice, SimpleHistoryAdmin)
 
-Changing a history-tracked model from the admin interface will automatically record the user who made the change (see :doc:`/user_tracking`).
+Changing a history-tracked model from the admin interface will automatically record the user who made the change (see :doc:`/user_tracking`) and let the user submit an optional change reason to be stored alongside the change.
 
 
 Displaying custom columns in the admin history list view
